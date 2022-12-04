@@ -5,7 +5,7 @@
 - [ ] Drugi deo domaceg.
 
 ## Izgled grafa iz graf1.txt
-![Slika grafa](G1.jpg)
+![Slika grafa](G1.JPG)
 
 ## Izgled grafa iz graf2.txt
-![Slika grafa](G2.jpg)
+![Slika grafa](G2.JPG)

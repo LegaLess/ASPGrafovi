@@ -2,6 +2,7 @@
 #define _GRAF_H_
 
 #include <iostream>
+#include "Cvor.h"
 
 using namespace std;
 
@@ -9,24 +10,49 @@ class Graf {
 
 public:
 
-	Graf(int);
+	Graf(int, int);
 
-	friend ostream& operator<<(ostream&, Graf&);
+	Graf(const Graf&);
 
-	Graf& dodajGranu(int, int);
+	Graf(Graf&&);
 
-	Graf& dodajCvor();
+	friend ostream& operator<<(ostream&, const Graf&);
 
+	friend istream& operator>>(istream&, Graf&);
+
+	Cvor& operator[](string) const;
+
+	Graf& dodajGranu(string, string, float);
+
+	Graf& dodajCvor(string);
+
+	~Graf();
 
 private:
 
-	int n;
+	int n = 0, e = 0;
 
-	bool** matrica;
+	int trenutniBrGrana = 0;
 
-	bool** alocirajMatricu(int);
+	int trenutniBrCvorova = 0;
 
-	void kopiraj(bool**, bool**);
+	float** matricaTezina = nullptr;
+
+	Cvor* cvorovi = nullptr;
+
+	float** alocirajMatricu(int);
+
+	void kopiraj(const Graf&);
+
+	void premesti(Graf&);
+
+	void brisi();
+
+	void kopiraj(float**, float**);
+
+	Cvor* alocirajCvorove(int);
+
+	void kopiraj(Cvor*, Cvor*);
 
 };
 

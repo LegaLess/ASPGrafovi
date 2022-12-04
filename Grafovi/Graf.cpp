@@ -1,39 +1,91 @@
 #include <iostream>
+#include <iomanip>
 #include "Graf.h"
 
 using namespace std;
 
-Graf::Graf(int br) : n(br){
+Graf::Graf(int brCvorova, int brGrana) : n(brCvorova), e(brGrana){
 
-	matrica = alocirajMatricu(n);
-
+	matricaTezina = alocirajMatricu(n);
+	cvorovi = alocirajCvorove(n);
 }
 
-Graf& Graf::dodajGranu(int i, int j)
+Graf::Graf(const Graf& g)
 {
-	matrica[i-1][j-1] = true;
-	
-	return *this;
+	if (this != &g) {
+		kopiraj(g);
+	}
 }
 
-Graf& Graf::dodajCvor()
+Graf::Graf(Graf&& g)
 {
-	bool** tmp = nullptr;
-
-	tmp = alocirajMatricu(n + 1);
-	kopiraj(tmp, matrica);
-
-	matrica = alocirajMatricu(++n);
-	kopiraj(matrica, tmp);
-
-	return *this;
+	premesti(g);
+	brisi();
 }
 
-bool** Graf::alocirajMatricu(int n){
-	bool** tmp = new bool*[n];
+Cvor& Graf::operator[](string s) const
+{
+	int k = 0;
 
 	for (int i = 0; i < n; i++) {
-		tmp[i] = new bool[n];
+		if (cvorovi[i].sadrzaj == s) {
+			k = i;
+			break;
+		}
+	}
+
+	return cvorovi[k];
+}
+
+Graf& Graf::dodajGranu(string podatak1, string podatak2, float tezina)
+{
+	if (trenutniBrGrana < e) {
+		matricaTezina[(*this)[podatak1].id][(*this)[podatak2].id] = tezina;
+		trenutniBrGrana++;
+	}
+	else {
+		matricaTezina[(*this)[podatak1].id][(*this)[podatak2].id] = tezina;
+		e++;
+		trenutniBrGrana++;
+	}
+
+	return *this;
+}
+
+Graf& Graf::dodajCvor(string podatak)
+{
+	float** tmp = nullptr;
+	Cvor* tmpCvorovi = nullptr;
+
+	tmp = alocirajMatricu(n + 1);
+	kopiraj(tmp, matricaTezina);
+
+	tmpCvorovi = alocirajCvorove(n + 1);
+	kopiraj(tmpCvorovi, cvorovi);
+
+
+	n++;
+
+	matricaTezina = alocirajMatricu(n);
+	kopiraj(matricaTezina, tmp);
+
+	cvorovi = alocirajCvorove(n);
+	kopiraj(cvorovi, tmpCvorovi);
+	cvorovi[n - 1].sadrzaj = podatak;
+
+	return *this;
+}
+
+Graf::~Graf()
+{
+	brisi();
+}
+
+float** Graf::alocirajMatricu(int n){
+	float** tmp = new float*[n];
+
+	for (int i = 0; i < n; i++) {
+		tmp[i] = new float[n];
 		for (int j = 0; j < n; j++) {
 			tmp[i][j] = false;
 		}
@@ -42,32 +94,102 @@ bool** Graf::alocirajMatricu(int n){
 	return tmp;
 }
 
-void Graf::kopiraj(bool** matrica1, bool** matrica2){
+void Graf::kopiraj(const Graf& g)
+{
+	matricaTezina = alocirajMatricu(n);
 
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
-			matrica1[i][j] = matrica2[i][j];
+			matricaTezina[i][j] = g.matricaTezina[i][j];
+		}
+	}
+
+	cvorovi = alocirajCvorove(n);
+
+	for (int i = 0; i < n; i++) {
+		cvorovi[i] = g.cvorovi[i];
+	}
+}
+
+void Graf::premesti(Graf& g)
+{
+	matricaTezina = g.matricaTezina;
+	cvorovi = g.cvorovi;
+}
+
+void Graf::brisi()
+{
+	for (int i = 0; i < n; i++) {
+		delete[] matricaTezina[i];
+	}
+
+	delete[] cvorovi;
+}
+
+void Graf::kopiraj(float** matricaTezina1, float** matricaTezina2){
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			matricaTezina1[i][j] = matricaTezina2[i][j];
 		}
 	}
 
 }
 
-ostream& operator<<(ostream& it, Graf& g)
+Cvor* Graf::alocirajCvorove(int n)
+{
+	Cvor::staticID = 0;
+
+	return new Cvor[n];
+}
+
+void Graf::kopiraj(Cvor* c1, Cvor* c2)
+{
+	for (int i = 0; i < n; i++) {
+		c1[i].sadrzaj = c2[i].sadrzaj;
+	}
+}
+
+ostream& operator<<(ostream& it, const Graf& g)
 {
 	for (int i = 0; i < g.n; i++) {
 		for (int j = 0; j < g.n; j++) {
-			if(j == g.n-1) it << g.matrica[i][j];
-			else it << g.matrica[i][j] << " - ";
+			if(j == g.n-1) it << g.matricaTezina[i][j];
+			else it << setprecision(2) << fixed <<  g.matricaTezina[i][j] << " - ";
 		}
 
 		it << endl;
 		if (i != g.n-1) {
 			for (int j = 0; j < g.n; j++) {
-				if (j != g.n) it << "|   ";
+				if (j != g.n) it << "  |    ";
 			}
 		}
 		it << endl;
 	}
 
+	for (int i = 0; i < g.n; i++) {
+		it << g.cvorovi[i] << " ";
+	}
+
+	it << endl;
+
 	return it;
+}
+
+istream& operator>>(istream& is, Graf& g)
+{
+	string podatak1;
+	string podatak2;
+	float tezina;
+
+	for (int i = 0; i < g.n; i++) {
+		is >> g.cvorovi[i];
+	}
+
+	for (int i = 0; i < g.e; i++) {
+		is >> podatak1 >> podatak2 >> tezina;
+		g.dodajGranu(podatak1, podatak2, tezina);
+	}
+
+	return is;
 }

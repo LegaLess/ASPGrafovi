@@ -1,0 +1,30 @@
+13
+27
+banka berza dobit investicije kapital likvidnost maloprodaja potrosac preduzece proizvod proizvodnja trgovanje trziste
+banka investicije 0.52
+banka potrosac 0.66
+berza trziste 0.94
+dobit likvidnost 0.66
+investicije berza 0.69
+kapital dobit 0.76
+kapital proizvodnja 0.79
+likvidnost banka 0.35
+likvidnost preduzece 0.45
+maloprodaja potrosac 0.83
+maloprodaja proizvod 0.62
+potrosac proizvod 0.84
+preduzece banka 0.32
+preduzece investicije 0.61
+preduzece kapital 0.82
+preduzece proizvodnja 0.88
+preduzece trgovanje 0.75
+proizvodnja dobit 0.69
+proizvodnja proizvod 0.94
+trgovanje banka 0.62
+trgovanje berza 0.81
+trgovanje maloprodaja 0.67
+trgovanje potrosac 0.81
+trgovanje trziste 0.97
+trziste berza 0.94
+trziste maloprodaja 0.45
+trziste potrosac 0.78

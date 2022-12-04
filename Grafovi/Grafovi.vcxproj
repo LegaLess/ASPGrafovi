@@ -139,11 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cvor.cpp" />
     <ClCompile Include="Graf.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cvor.h" />
     <ClInclude Include="Graf.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="graf1.txt" />
+    <Text Include="graf2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

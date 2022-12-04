@@ -21,10 +21,20 @@
     <ClCompile Include="Graf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Cvor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graf.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Cvor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="graf1.txt" />
+    <Text Include="graf2.txt" />
   </ItemGroup>
 </Project>

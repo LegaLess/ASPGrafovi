@@ -1,0 +1,24 @@
+12
+21
+algoritam artikl ETF knjiga podaci proizvod racunar skola student tekst ucenje udzbenik
+algoritam podaci 0.65
+artikl proizvod 0.95
+artikl racunar 0.5
+ETF racunar 0.8
+ETF student 0.9
+ETF udzbenik 0.67
+knjiga udzbenik 0.72
+podaci algoritam 0.65
+proizvod artikl 0.95
+proizvod knjiga 0.45
+proizvod racunar 0.51
+racunar algoritam 0.88
+racunar podaci 0.87
+skola ETF 0.8
+skola knjiga 0.85
+student racunar 0.8
+tekst knjiga 0.82
+tekst podaci 0.81
+ucenje knjiga 0.9
+ucenje skola 0.82
+ucenje student 0.8

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "Graf.h"
 
 using namespace std;
@@ -6,19 +8,29 @@ using namespace std;
 
 int main() {
 
-	Graf graf(5);
+	int n, e;
+
+	string line;
+
+	ifstream reader("graf1.txt");
+
+	reader >> n >> e;
+
+	Graf graf(n, e);
+
+	reader >> graf;
 
 	cout << graf;
 
-	graf.dodajGranu(4, 2).dodajGranu(1, 3);
+	graf.dodajCvor("kenjanje");
+	graf.dodajGranu("kenjanje", "student", 0.99f);
+	graf.dodajGranu("knjiga", "proizvod", 0.69f);
+
+	cout << endl;
 
 	cout << graf;
 
-	graf.dodajCvor().dodajCvor();
-
-	graf.dodajGranu(7, 7).dodajGranu(5, 2);
-
-	cout << graf;
+	reader.close();
 
 	return 0;
 }

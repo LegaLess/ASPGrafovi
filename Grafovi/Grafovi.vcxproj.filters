@@ -32,6 +32,9 @@
     <ClInclude Include="Cvor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PrioritetniRed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="graf1.txt" />

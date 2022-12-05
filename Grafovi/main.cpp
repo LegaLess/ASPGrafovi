@@ -8,7 +8,7 @@ using namespace std;
 
 int main() {
 
-	int n, e;
+	int n, e, k;
 
 	string line;
 
@@ -20,6 +20,11 @@ int main() {
 
 	reader >> graf;
 
+	cin >> k;
+
+
+
+	/*
 	cout << graf;
 
 	graf.dodajCvor("kenjanje");
@@ -31,7 +36,7 @@ int main() {
 	cout << endl;
 
 	cout << graf;
-
+	*/
 	reader.close();
 
 	return 0;

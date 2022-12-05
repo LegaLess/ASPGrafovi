@@ -37,6 +37,12 @@ Cvor& Graf::operator[](string s) const
 	return cvorovi[k];
 }
 
+string* Graf::najkracaPutanja(string podatak1, string podatak2)
+{
+	
+
+}
+
 Graf& Graf::dodajGranu(string podatak1, string podatak2, float tezina)
 {
 	if (trenutniBrGrana < e) {
@@ -83,8 +89,11 @@ Graf& Graf::brisiGranu(string s1, string s2)
 	return *this;
 }
 
-Graf& Graf::brisiCvor(string, string)
+Graf& Graf::brisiCvor(string s1)
 {
+
+
+
 	return *this;
 }
 

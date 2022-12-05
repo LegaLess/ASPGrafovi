@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="Cvor.h" />
     <ClInclude Include="Graf.h" />
+    <ClInclude Include="PrioritetniRed.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="graf1.txt" />

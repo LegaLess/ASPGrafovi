@@ -22,13 +22,15 @@ public:
 
 	Cvor& operator[](string) const;
 
+	string* najkracaPutanja(string, string);
+
 	Graf& dodajGranu(string, string, float);
 
 	Graf& dodajCvor(string);
 
 	Graf& brisiGranu(string, string);
 
-	Graf& brisiCvor(string, string);
+	Graf& brisiCvor(string);
 
 	~Graf();
 

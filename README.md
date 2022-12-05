@@ -2,7 +2,8 @@
 - [ ] Obraditi edge cases.
 - [X] Dodati izbacivanje grane.
 - [ ] Dodati izbacivanje cvora.
-- [ ] Drugi deo domaceg.
+- [ ] Napraviti prioritetni red.
+- [ ] Napraviti dijkstra algoritam :skull: .
 
 ## Izgled grafa iz graf1.txt
 ![Slika grafa](G1.JPG)

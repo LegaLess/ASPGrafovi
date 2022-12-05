@@ -1,6 +1,6 @@
 ## Taskovi
 - [ ] Obraditi edge cases.
-- [ ] Dodati izbacivanje grane.
+- [X] Dodati izbacivanje grane.
 - [ ] Dodati izbacivanje cvora.
 - [ ] Drugi deo domaceg.
 

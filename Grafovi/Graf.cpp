@@ -76,6 +76,18 @@ Graf& Graf::dodajCvor(string podatak)
 	return *this;
 }
 
+Graf& Graf::brisiGranu(string s1, string s2)
+{
+	matricaTezina[(*this)[s1].id][(*this)[s2].id] = 0.0;
+
+	return *this;
+}
+
+Graf& Graf::brisiCvor(string, string)
+{
+	return *this;
+}
+
 Graf::~Graf()
 {
 	brisi();

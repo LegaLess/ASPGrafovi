@@ -26,6 +26,10 @@ public:
 
 	Graf& dodajCvor(string);
 
+	Graf& brisiGranu(string, string);
+
+	Graf& brisiCvor(string, string);
+
 	~Graf();
 
 private:

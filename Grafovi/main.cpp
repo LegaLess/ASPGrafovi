@@ -26,6 +26,8 @@ int main() {
 	graf.dodajGranu("kenjanje", "student", 0.99f);
 	graf.dodajGranu("knjiga", "proizvod", 0.69f);
 
+	graf.brisiGranu("knjiga", "proizvod");
+
 	cout << endl;
 
 	cout << graf;

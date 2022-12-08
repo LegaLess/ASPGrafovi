@@ -39,6 +39,17 @@ Cvor& Graf::operator[](string s) const
 
 
 
+void Graf::brisiGraf()
+{
+	brisi();
+	cvorovi = alocirajCvorove(0);
+	matricaTezina = alocirajMatricu(0);
+	n = 0;
+	e = 0;
+	trenutniBrGrana = 0;
+	Cvor::staticID = 0;
+}
+
 Graf& Graf::dodajGranu(string podatak1, string podatak2, float tezina)
 {
 	if (trenutniBrGrana < e) {
@@ -169,6 +180,8 @@ void Graf::brisi()
 	for (int i = 0; i < n; i++) {
 		delete[] matricaTezina[i];
 	}
+
+	delete[] matricaTezina;
 
 	delete[] cvorovi;
 }

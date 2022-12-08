@@ -31,6 +31,13 @@ int main() {
 
 	cout << graf;
 
+	graf.brisiGraf();
+	graf.dodajCvor("kenjanje");
+	graf.dodajCvor("WC");
+	graf.dodajGranu("kenjanje", "WC", 0.56f);
+
+	cout << graf;
+
 	reader.close();
 
 	return 0;

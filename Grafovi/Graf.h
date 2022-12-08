@@ -24,6 +24,8 @@ public:
 
 	string* najkracaPutanja(string, string);
 
+	void brisiGraf();
+
 	Graf& dodajGranu(string, string, float);
 
 	Graf& dodajCvor(string);

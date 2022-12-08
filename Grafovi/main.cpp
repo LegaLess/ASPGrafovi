@@ -20,23 +20,17 @@ int main() {
 
 	reader >> graf;
 
-	cin >> k;
+	cout << graf;
+	
+	graf.brisiCvor("podaci");
 
-
-
-	/*
 	cout << graf;
 
-	graf.dodajCvor("kenjanje");
-	graf.dodajGranu("kenjanje", "student", 0.99f);
-	graf.dodajGranu("knjiga", "proizvod", 0.69f);
-
-	graf.brisiGranu("knjiga", "proizvod");
-
-	cout << endl;
+	graf.dodajCvor("test");
+	graf.dodajGranu("test", "algoritam", 0.69f);
 
 	cout << graf;
-	*/
+
 	reader.close();
 
 	return 0;

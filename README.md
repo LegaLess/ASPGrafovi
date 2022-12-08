@@ -1,7 +1,7 @@
 ## Taskovi
 - [ ] Obraditi edge cases.
 - [X] Dodati izbacivanje grane.
-- [ ] Dodati izbacivanje cvora.
+- [X] Dodati izbacivanje cvora.
 - [ ] Napraviti prioritetni red.
 - [ ] Napraviti dijkstra algoritam :skull: .
 

@@ -40,8 +40,6 @@ private:
 
 	int trenutniBrGrana = 0;
 
-	int trenutniBrCvorova = 0;
-
 	float** matricaTezina = nullptr;
 
 	Cvor* cvorovi = nullptr;

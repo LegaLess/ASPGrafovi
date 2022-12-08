@@ -37,11 +37,7 @@ Cvor& Graf::operator[](string s) const
 	return cvorovi[k];
 }
 
-string* Graf::najkracaPutanja(string podatak1, string podatak2)
-{
-	
 
-}
 
 Graf& Graf::dodajGranu(string podatak1, string podatak2, float tezina)
 {
@@ -85,14 +81,44 @@ Graf& Graf::dodajCvor(string podatak)
 Graf& Graf::brisiGranu(string s1, string s2)
 {
 	matricaTezina[(*this)[s1].id][(*this)[s2].id] = 0.0;
+	e--;
+	trenutniBrGrana--;
 
 	return *this;
 }
 
 Graf& Graf::brisiCvor(string s1)
 {
+	int i = (*this)[s1].id, k = 0;
+	
 
+	for (int j = 0; j < n; j++) {
+		if (matricaTezina[i][j] || matricaTezina[j][i]) k++;
+	}
 
+	while (i < n - 1) {
+
+		cvorovi[i + 1].id--;
+		cvorovi[i] = cvorovi[i + 1];
+
+		for (int j = 0; j < n; j++) {
+			matricaTezina[j][i] = matricaTezina[j][i + 1];
+		}
+
+		for (int j = 0; j < n; j++) {
+			matricaTezina[i][j] = matricaTezina[i + 1][j];
+		}
+
+		i++;
+	}
+
+	delete[] matricaTezina[n - 1];
+
+	n--;
+	Cvor::staticID--;
+
+	e -= k;
+	trenutniBrGrana -= k;
 
 	return *this;
 }

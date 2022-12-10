@@ -2,8 +2,10 @@
 - [ ] Obraditi edge cases.
 - [X] Dodati izbacivanje grane.
 - [X] Dodati izbacivanje cvora.
-- [ ] Napraviti prioritetni red.
-- [ ] Napraviti dijkstra algoritam :skull: .
+- [X] Napraviti prioritetni red.
+- [X] Napraviti dijkstra algoritam :skull: .
+- [ ] Napraviti algoritam za k najslicnijih.
+- [ ] Algoritam za jako povezane reci.
 
 ## Izgled grafa iz graf1.txt
 ![Slika grafa](G1.JPG)

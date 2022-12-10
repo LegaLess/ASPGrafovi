@@ -22,7 +22,7 @@ public:
 
 	Cvor& operator[](string) const;
 
-	string* najkracaPutanja(string, string);
+	void najkracaPutanja(string, string);
 
 	void brisiGraf();
 

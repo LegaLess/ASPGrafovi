@@ -150,6 +150,7 @@
     <ClCompile Include="Cvor.cpp" />
     <ClCompile Include="Graf.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PrioritetniRed.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cvor.h" />

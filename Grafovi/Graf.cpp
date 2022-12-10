@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include "Graf.h"
+#include "PrioritetniRed.h"
 
 using namespace std;
 
@@ -35,6 +36,79 @@ Cvor& Graf::operator[](string s) const
 	}
 
 	return cvorovi[k];
+}
+
+void Graf::najkracaPutanja(string s1, string s2)
+{
+	Cvor* c1 = &(*this)[s1];
+	Cvor* c2 = &(*this)[s2];
+	float* dist = new float[n];
+	PrioritetniRed p;
+
+	for (int i = 0; i < n; i++) dist[i] = 0;
+
+	dist[c1->id] = 1;
+
+	p.insert(*c1, 1);
+
+	Cvor* v = nullptr;
+	float cena;
+
+	while (!p.empty()) {
+		Cvor* tek = &p.del();
+
+		for (int i = 0; i < n; i++) {
+			if (i == tek->id) continue;
+			if (matricaTezina[tek->id][i]) {
+				v = &cvorovi[i];
+				cena = matricaTezina[tek->id][i];
+				if (dist[v->id] < dist[tek->id] * cena) {
+					dist[v->id] = dist[tek->id] * cena;
+					p.insert(*v, cena);
+				}
+			}
+
+		}
+		if (tek == c2) break;
+	}
+
+	cout << c1->sadrzaj << "->" << c2->sadrzaj << " " << dist[c2->id] << endl;
+
+	delete[] dist;
+
+	/*
+	for (int i = 0; i < n; i++) {
+		dist[i] = INFINITY;
+	}
+
+	p.insert(*c1, 1);
+	dist[c1->id] = 1;
+
+	while (!p.empty()) {
+		int u = p.del().id;
+		Cvor* tek = nullptr;
+		float tezina;
+
+		for (int i = u; i < n; i++) {
+			if (matricaTezina[u][i]) {
+				tek = &cvorovi[i];
+				tezina = matricaTezina[u][i];
+				if (dist[tek->id] > dist[u] * tezina) {
+					dist[tek->id] = dist[u] * tezina;
+					p.insert(*tek, dist[tek->id]);
+				}
+			}
+
+		}
+		cout << p;
+	}
+
+	//for (int i = 0; i < n; i++) {
+		//cout << c1->sadrzaj << "->" << cvorovi[i].sadrzaj << " " << dist[i] << endl;
+	//}
+
+	delete[] dist;
+	*/
 }
 
 

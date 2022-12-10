@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include "Graf.h"
+#include "PrioritetniRed.h"
 
 using namespace std;
 
@@ -20,6 +21,9 @@ int main() {
 
 	reader >> graf;
 
+	graf.najkracaPutanja("ucenje", "racunar");
+
+	/*
 	cout << graf;
 	
 	graf.brisiCvor("podaci");
@@ -39,6 +43,8 @@ int main() {
 	cout << graf;
 
 	reader.close();
+
+	*/
 
 	return 0;
 }

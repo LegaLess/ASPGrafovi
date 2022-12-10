@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "Cvor.h"
 
 using namespace std;
 
@@ -10,20 +11,26 @@ class PrioritetniRed {
 
 public:
 
-	PrioritetniRed& push(string, float);
+	PrioritetniRed() : prvi(nullptr) {}
+
+	PrioritetniRed& insert(Cvor&, float);
 	
+	Cvor& del();
+
+	bool empty();
+
+	friend ostream& operator<<(ostream&, PrioritetniRed&);
 
 private:
 
 	struct Elem {
-		string sadrzaj;
-		float prioritet;
+		Cvor* cvor = nullptr;
+		float priority;
 		Elem* next;
-		Elem() : sadrzaj(""), prioritet(0.00f), next(nullptr) {}
+		Elem(Cvor& c, float p) : next(nullptr), priority(p), cvor(&c) {}
 	};
 
 	Elem* prvi;
-
 };
 
 

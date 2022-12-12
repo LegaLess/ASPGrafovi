@@ -40,10 +40,54 @@ Cvor& Graf::operator[](string s) const
 
 void Graf::najkracaPutanja(string s1, string s2)
 {
+	/*
+	Cvor* c1 = &(*this)[s1];
+	Cvor* c2 = &(*this)[s2];
+
+	float maxDist = 0;
+
+	Cvor* maxCvor = nullptr;
+
+	float* dist = new float[n];
+	for (int i = 0; i < n; i++) dist[i] = 0;
+	dist[c1->id] = 1;
+
+	bool* poseceni = new bool[n];
+	for (int i = 0; i < n; i++) poseceni[i] = false;
+
+	for (int i = 0; i < n - 1; i++) {
+
+		for (int j = 0; j < n; j++) {
+			if (!poseceni[j] && dist[j] >= maxDist) {
+				maxCvor = &cvorovi[j];
+				maxDist = dist[j];
+			}
+		}
+
+		poseceni[maxCvor->id] = true;
+
+		for (int j = 0; j < n; j++) {
+			if (!poseceni[j] && dist[maxCvor->id] && matricaTezina[maxCvor->id][j] && dist[j] < dist[maxCvor->id] * matricaTezina[maxCvor->id][j]) {
+				cout << 1;
+				dist[j] = dist[maxCvor->id] * matricaTezina[maxCvor->id][j];
+			}
+		}
+
+	}
+
+	cout << s1 << " " << s2 << " : " << dist[c2->id];
+	*/
+
 	Cvor* c1 = &(*this)[s1];
 	Cvor* c2 = &(*this)[s2];
 	float* dist = new float[n];
+	string* nazivi = new string[n];
+	float* cene = new float[n];
 	PrioritetniRed p;
+
+	int k = 0;
+
+	string naziv;
 
 	for (int i = 0; i < n; i++) dist[i] = 0;
 
@@ -52,63 +96,67 @@ void Graf::najkracaPutanja(string s1, string s2)
 	p.insert(*c1, 1);
 
 	Cvor* v = nullptr;
-	float cena;
+	float cena = 0;
+
+	float tmpCena = 0;
 
 	while (!p.empty()) {
 		Cvor* tek = &p.del();
 
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n - 1; i++) {
 			if (i == tek->id) continue;
 			if (matricaTezina[tek->id][i]) {
 				v = &cvorovi[i];
 				cena = matricaTezina[tek->id][i];
-				if (dist[v->id] < dist[tek->id] * cena) {
+				if (dist[v->id] > dist[tek->id] * cena) {
 					dist[v->id] = dist[tek->id] * cena;
 					p.insert(*v, cena);
+					//naziv = v->sadrzaj;
+					//tmpCena = cena;
 				}
 			}
-
+		}
+		if (k >= 0 && k < n) {
+			nazivi[k] = naziv;
+			cene[k] = tmpCena;
+			k++;
 		}
 		if (tek == c2) break;
+		
 	}
 
-	cout << c1->sadrzaj << "->" << c2->sadrzaj << " " << dist[c2->id] << endl;
-
+	cout << s1 << " - " << s2 << " : " << dist[c2->id] << endl;
+	
+	
+	for (int i = 0; i < k; i++) {
+		if (i == k - 1) cout << nazivi[i];
+		else cout << nazivi[i] << " -(" << cene[i] << ")->";
+	}
+	
+	
 	delete[] dist;
+	delete[] cene;
+	delete[] nazivi;
+	
+}
 
-	/*
+void Graf::kNajslicnijih(string s, int k)
+{
+
+	Cvor* pocetni = &(*this)[s];
+
+	string* nazivi = new string[n];
+	int j = 0;
 	for (int i = 0; i < n; i++) {
-		dist[i] = INFINITY;
-	}
-
-	p.insert(*c1, 1);
-	dist[c1->id] = 1;
-
-	while (!p.empty()) {
-		int u = p.del().id;
-		Cvor* tek = nullptr;
-		float tezina;
-
-		for (int i = u; i < n; i++) {
-			if (matricaTezina[u][i]) {
-				tek = &cvorovi[i];
-				tezina = matricaTezina[u][i];
-				if (dist[tek->id] > dist[u] * tezina) {
-					dist[tek->id] = dist[u] * tezina;
-					p.insert(*tek, dist[tek->id]);
-				}
-			}
-
+		if (j >= k) break;
+		if (matricaTezina[pocetni->id][i] || matricaTezina[i][pocetni->id]) {
+			nazivi[j] = cvorovi[i].sadrzaj;
+			j++;
 		}
-		cout << p;
 	}
-
-	//for (int i = 0; i < n; i++) {
-		//cout << c1->sadrzaj << "->" << cvorovi[i].sadrzaj << " " << dist[i] << endl;
-	//}
-
-	delete[] dist;
-	*/
+	for (int i = 0; i < j; i++) {
+		cout << nazivi[i] << " ";
+	}
 }
 
 

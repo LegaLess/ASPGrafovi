@@ -21,7 +21,9 @@ int main() {
 
 	reader >> graf;
 
-	graf.najkracaPutanja("ucenje", "racunar");
+	//graf.kNajslicnijih("banka", 4);
+
+	graf.najkracaPutanja("ucenje", "udzbenik");
 
 	/*
 	cout << graf;

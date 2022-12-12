@@ -24,6 +24,8 @@ public:
 
 	void najkracaPutanja(string, string);
 
+	void kNajslicnijih(string, int);
+
 	void brisiGraf();
 
 	Graf& dodajGranu(string, string, float);

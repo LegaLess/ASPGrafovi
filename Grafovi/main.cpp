@@ -9,11 +9,11 @@ using namespace std;
 
 int main() {
 
-	int n, e, k;
+	int n, e;
 
 	string line;
 
-	ifstream reader("graf1.txt");
+	ifstream reader("graf2.txt");
 
 	reader >> n >> e;
 
@@ -21,9 +21,11 @@ int main() {
 
 	reader >> graf;
 
-	graf.najkracaPutanja("ucenje", "racunar");
+	graf.najjacePovezani("preduzece");
 
 	/*
+	graf.najkracaPutanja("proizvod", "kapital");
+
 	cout << graf;
 	
 	graf.brisiCvor("podaci");
@@ -36,15 +38,12 @@ int main() {
 	cout << graf;
 
 	graf.brisiGraf();
-	graf.dodajCvor("kenjanje");
-	graf.dodajCvor("WC");
-	graf.dodajGranu("kenjanje", "WC", 0.56f);
 
 	cout << graf;
 
-	reader.close();
-
 	*/
+
+	reader.close();
 
 	return 0;
 }

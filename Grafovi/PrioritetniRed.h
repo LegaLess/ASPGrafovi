@@ -11,7 +11,11 @@ class PrioritetniRed {
 
 public:
 
-	PrioritetniRed() : prvi(nullptr) {}
+	PrioritetniRed() {}
+
+	PrioritetniRed(const PrioritetniRed&);
+
+	PrioritetniRed(PrioritetniRed&&);
 
 	PrioritetniRed& insert(Cvor&, float);
 	
@@ -20,6 +24,8 @@ public:
 	bool empty();
 
 	friend ostream& operator<<(ostream&, PrioritetniRed&);
+
+	~PrioritetniRed();
 
 private:
 
@@ -30,7 +36,14 @@ private:
 		Elem(Cvor& c, float p) : next(nullptr), priority(p), cvor(&c) {}
 	};
 
-	Elem* prvi;
+	Elem* prvi = nullptr;
+
+	void brisi();
+
+	void kopiraj(const PrioritetniRed&);
+
+	void premesti(PrioritetniRed&);
+
 };
 
 

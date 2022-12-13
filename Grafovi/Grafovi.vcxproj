@@ -151,11 +151,13 @@
     <ClCompile Include="Graf.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PrioritetniRed.cpp" />
+    <ClCompile Include="Stek.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cvor.h" />
     <ClInclude Include="Graf.h" />
     <ClInclude Include="PrioritetniRed.h" />
+    <ClInclude Include="Stek.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="graf1.txt" />

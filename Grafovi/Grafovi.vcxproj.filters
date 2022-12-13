@@ -27,6 +27,9 @@
     <ClCompile Include="PrioritetniRed.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Stek.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graf.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PrioritetniRed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stek.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

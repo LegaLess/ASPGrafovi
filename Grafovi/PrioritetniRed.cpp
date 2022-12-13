@@ -5,6 +5,19 @@
 
 using namespace std;
 
+PrioritetniRed::PrioritetniRed(const PrioritetniRed& s)
+{
+	if (this != &s) {
+		kopiraj(s);
+	}
+}
+
+PrioritetniRed::PrioritetniRed(PrioritetniRed&& s)
+{
+	brisi();
+	premesti(s);
+}
+
 PrioritetniRed& PrioritetniRed::insert(Cvor& c, float p)
 {
 	Elem* novi = new Elem(c, p);
@@ -58,6 +71,34 @@ bool PrioritetniRed::empty()
 	else {
 		return true;
 	}
+}
+
+PrioritetniRed::~PrioritetniRed()
+{
+	brisi();
+}
+
+void PrioritetniRed::brisi()
+{
+	Elem* tmp;
+	while (tmp = prvi) {
+		prvi = prvi->next;
+		delete tmp;
+	}
+}
+
+void PrioritetniRed::kopiraj(const PrioritetniRed& p)
+{
+	Elem* tek = p.prvi;
+	while (tek) {
+		this->insert(*tek->cvor, tek->priority);
+		tek = tek->next;
+	}
+}
+
+void PrioritetniRed::premesti(PrioritetniRed& p)
+{
+	prvi = p.prvi;
 }
 
 ostream& operator<<(ostream& it, PrioritetniRed& p)

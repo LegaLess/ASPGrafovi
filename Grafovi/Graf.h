@@ -24,6 +24,8 @@ public:
 
 	void najkracaPutanja(string, string);
 
+	void najjacePovezani(string);
+
 	void brisiGraf();
 
 	Graf& dodajGranu(string, string, float);
@@ -59,6 +61,10 @@ private:
 	Cvor* alocirajCvorove(int);
 
 	void kopiraj(Cvor*, Cvor*);
+
+	string* DFS(string, string*);
+
+	float** transpose(float **);
 
 };
 

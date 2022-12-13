@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "Graf.h"
 #include "PrioritetniRed.h"
+#include "Stek.h"
 
 using namespace std;
 
@@ -42,21 +43,37 @@ void Graf::najkracaPutanja(string s1, string s2)
 {
 	Cvor* c1 = &(*this)[s1];
 	Cvor* c2 = &(*this)[s2];
-	float* dist = new float[n];
+
+	Cvor* tek = c1;
+
+	int k = c2->id;
+	int j = 0;
+
 	PrioritetniRed p;
 
-	for (int i = 0; i < n; i++) dist[i] = 0;
+	float* dist = new float[n];
+	int* prethodnici = new int[n];
+	string* put = new string[n];
+	float* tezine = new float[n];
+
+	for (int i = 0; i < n; i++) {
+		dist[i] = 0;
+		put[i] = "";
+		prethodnici[i] = -1;
+		tezine[i] = 0;
+	}
 
 	dist[c1->id] = 1;
 
 	p.insert(*c1, 1);
 
 	Cvor* v = nullptr;
-	float cena;
+	float cena = 0;
 
 	while (!p.empty()) {
-		Cvor* tek = &p.del();
+		tek = &p.del();
 
+		if (tek == c2) break;
 		for (int i = 0; i < n; i++) {
 			if (i == tek->id) continue;
 			if (matricaTezina[tek->id][i]) {
@@ -64,51 +81,82 @@ void Graf::najkracaPutanja(string s1, string s2)
 				cena = matricaTezina[tek->id][i];
 				if (dist[v->id] < dist[tek->id] * cena) {
 					dist[v->id] = dist[tek->id] * cena;
+					prethodnici[v->id] = tek->id;
 					p.insert(*v, cena);
 				}
 			}
-
 		}
-		if (tek == c2) break;
 	}
 
-	cout << c1->sadrzaj << "->" << c2->sadrzaj << " " << dist[c2->id] << endl;
+	while (k != -1) {
+		if (j >= 0 && j < n) {
+			put[j] = cvorovi[k].sadrzaj;
+			tezine[j] = prethodnici[k] != -1 ? matricaTezina[prethodnici[k]][k] : 0;
+			j++;
+		}
+		k = prethodnici[k];
+	}
+	if (j == 1) cout << "Ne moze se doci od cvora " << s1 << " do cvora " << s2;
+	else {
+		for (int i = j-1; i > 0; i--) {
+			if(i >= 0 && i < n) cout << put[i] << "(" << tezine[i-1] << ")->";
+		}
+
+		cout << s2 << "(0)";
+	}
+
 
 	delete[] dist;
+	delete[] put;
+	delete[] tezine;
+	delete[] prethodnici;
+}
 
-	/*
+void Graf::najjacePovezani(string s1)
+{
+	string* povezani1 = new string[n];
+	string* povezani2 = new string[n];
+
+	string* konacnoPovezani = new string[n];
+	
+	int k = 0;
+
+	DFS(s1, povezani1);
+	this->transpose(matricaTezina);
+	//cout << *this;
+	DFS(s1, povezani2);
+	this->transpose(matricaTezina);
+	//cout << *this;
+
+
+	//for (int i = 0; i < n; i++) cout << povezani1[i] << " ";
+	//cout << endl;
+	//for (int i = 0; i < n; i++) cout << povezani2[i] << " ";
+	//cout << endl;
+
 	for (int i = 0; i < n; i++) {
-		dist[i] = INFINITY;
-	}
-
-	p.insert(*c1, 1);
-	dist[c1->id] = 1;
-
-	while (!p.empty()) {
-		int u = p.del().id;
-		Cvor* tek = nullptr;
-		float tezina;
-
-		for (int i = u; i < n; i++) {
-			if (matricaTezina[u][i]) {
-				tek = &cvorovi[i];
-				tezina = matricaTezina[u][i];
-				if (dist[tek->id] > dist[u] * tezina) {
-					dist[tek->id] = dist[u] * tezina;
-					p.insert(*tek, dist[tek->id]);
-				}
+		bool postoji = false;
+		for (int j = 0; j < n; j++) {
+			if (povezani1[i] == povezani2[j]) {
+				postoji = true;
+				break;
 			}
-
 		}
-		cout << p;
+		if (postoji) {
+			if (k >= 0 && k < n) {
+				konacnoPovezani[k] = povezani1[i];
+				k++;
+			}
+		}
 	}
 
-	//for (int i = 0; i < n; i++) {
-		//cout << c1->sadrzaj << "->" << cvorovi[i].sadrzaj << " " << dist[i] << endl;
-	//}
+	cout << "Najjace povezani cvorovi sa cvorom " << s1 << " su: ";
 
-	delete[] dist;
-	*/
+	for (int i = 0; i < n; i++) {
+		if (i == n - 1) cout << konacnoPovezani[i];
+		else cout << konacnoPovezani[i] << ", ";
+	}
+
 }
 
 
@@ -228,6 +276,10 @@ float** Graf::alocirajMatricu(int n){
 
 void Graf::kopiraj(const Graf& g)
 {
+	n = g.n;
+	e = g.e;
+	trenutniBrGrana = g.trenutniBrGrana;
+
 	matricaTezina = alocirajMatricu(n);
 
 	for (int i = 0; i < n; i++) {
@@ -284,6 +336,54 @@ void Graf::kopiraj(Cvor* c1, Cvor* c2)
 	}
 }
 
+string* Graf::DFS(string s, string* povezani)
+{
+	Cvor* pocetak = &(*this)[s];
+	bool* poseceni = new bool[n];
+	Stek stack;
+	for (int i = 0; i < n; i++) poseceni[i] = false;
+	stack.push(*pocetak);
+
+	Cvor* tek = nullptr;
+	Cvor* v = nullptr;
+
+	int k = 0;
+
+	while (!stack.empty()) {
+		tek = &stack.pop();
+		if (!poseceni[tek->id]) {
+			if (k >= 0 && k < n) {
+				povezani[k] = tek->sadrzaj;
+				k++;
+			}
+			poseceni[tek->id] = true;
+		}
+
+		for (int i = 0; i < n; i++) {
+			if (matricaTezina[tek->id][i] && !poseceni[i]) {
+				stack.push(cvorovi[i]);
+			}
+		}
+
+	}
+
+	return povezani;
+}
+
+float** Graf::transpose(float** matrica)
+{
+	float tmp;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			tmp = matrica[i][j];
+			matrica[i][j] = matrica[j][i];
+			matrica[j][i] = tmp;
+		}
+	}
+
+	return matrica;
+}
+
 ostream& operator<<(ostream& it, const Graf& g)
 {
 	for (int i = 0; i < g.n; i++) {
@@ -310,20 +410,20 @@ ostream& operator<<(ostream& it, const Graf& g)
 	return it;
 }
 
-istream& operator>>(istream& is, Graf& g)
+istream& operator>>(istream& ut, Graf& g)
 {
 	string podatak1;
 	string podatak2;
 	float tezina;
 
 	for (int i = 0; i < g.n; i++) {
-		is >> g.cvorovi[i];
+		ut >> g.cvorovi[i];
 	}
 
 	for (int i = 0; i < g.e; i++) {
-		is >> podatak1 >> podatak2 >> tezina;
+		ut >> podatak1 >> podatak2 >> tezina;
 		g.dodajGranu(podatak1, podatak2, tezina);
 	}
 
-	return is;
+	return ut;
 }

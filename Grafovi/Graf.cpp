@@ -168,6 +168,21 @@ void Graf::najjacePovezani(string s1)
 
 void Graf::kNajjacePovezanih(string s1, int k)
 {
+
+	bool postoji = false;
+
+	for (int i = 0; i < n; i++) {
+		if (s1 == cvorovi[i].sadrzaj) {
+			postoji = true;
+			break;
+		}
+	}
+
+	if (!postoji) {
+		cout << "Cvor ne postoji.";
+		return;
+	}
+
 	string* povezani = new string[n];
 	string tmp;
 	float dist1, dist2;
@@ -195,6 +210,20 @@ void Graf::kNajjacePovezanih(string s1, int k)
 		}
 
 	}
+
+	postoji = false;
+	for (int i = 1; i < n; i++) {
+		if (povezani[i] != "") {
+			postoji = false;
+			break;
+		}
+	}
+
+	if (!postoji) {
+		cout << "Cvor nema nikakve grane.";
+		return;
+	}
+
 	cout << "k najjace povezanih reci sa recju " << s1 << " su: ";
 
 	for (int i = 1; i < n; i++) {

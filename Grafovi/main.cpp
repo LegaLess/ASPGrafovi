@@ -75,6 +75,7 @@ int main() {
 				break;
 			}
 			graf.dodajCvor(s1);
+			cout << "Cvor je dodat";
 			cout << endl;
 			break;
 
@@ -85,6 +86,7 @@ int main() {
 				break;
 			}
 			graf.brisiCvor(s1);
+			cout << "Cvor je izbrisan";
 			cout << endl;
 			break;
 
@@ -95,6 +97,7 @@ int main() {
 				break;
 			}
 			graf.dodajGranu(s1, s2, t);
+			cout << "Grana je dodata";
 			cout << endl;
 			break;
 
@@ -105,6 +108,7 @@ int main() {
 				break;
 			}
 			graf.brisiGranu(s1, s2);
+			cout << "Grana je obrisana";
 			cout << endl;
 			break;
 

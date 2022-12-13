@@ -26,6 +26,8 @@ public:
 
 	void najjacePovezani(string);
 
+	void kNajjacePovezanih(string, int);
+
 	void brisiGraf();
 
 	Graf& dodajGranu(string, string, float);
@@ -46,6 +48,8 @@ private:
 
 	float** matricaTezina = nullptr;
 
+	float* dist;
+
 	Cvor* cvorovi = nullptr;
 
 	float** alocirajMatricu(int);
@@ -62,9 +66,9 @@ private:
 
 	void kopiraj(Cvor*, Cvor*);
 
-	string* DFS(string, string*);
+	string* DFS(string, string*, bool);
 
-	float** transpose(float **);
+	void najkracaPutanjaBezIspisa(string, string);
 
 };
 

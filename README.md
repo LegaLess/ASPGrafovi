@@ -1,14 +1,14 @@
 ## Taskovi
-- [ ] Obraditi edge cases.
+- [X] Obraditi edge cases.
 - [X] Dodati izbacivanje grane.
 - [X] Dodati izbacivanje cvora.
 - [X] Napraviti prioritetni red.
 - [X] Napraviti dijkstra algoritam :skull:.
-- [ ] Napraviti algoritam za k najslicnijih.
-- [ ] Algoritam za jako povezane reci.
-- [ ] Napraviti SCC.
-- [ ] Napraviti BFS/DFS.
-- [ ] Pomocu steka pravilno ispisati najkraci put.
+- [X] Napraviti algoritam za k najslicnijih.
+- [X] Algoritam za jako povezane reci.
+- [X] Napraviti SCC.
+- [X] Napraviti BFS/DFS.
+- [X] Pomocu steka pravilno ispisati najkraci put.
 
 ## Izgled grafa iz graf1.txt
 ![Slika grafa](G1.JPG)
